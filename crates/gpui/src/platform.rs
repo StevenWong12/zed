@@ -564,6 +564,9 @@ pub enum WindowBounds {
 
     /// Set the window to the given size in pixels
     Fixed(Bounds<GlobalPixels>),
+
+    /// Center the window to the screen
+    Centered(Size<GlobalPixels>),
 }
 
 /// The appearance of the window, as defined by the operating system.

@@ -82,6 +82,11 @@ impl Bind for SerializedWindowsBounds {
                 let next_index = statement.bind(&"Fixed", start_index)?;
                 (Some(region), next_index)
             }
+            // TODO@hzy bind?
+            WindowBounds::Centered(size) => {
+                let next_index = statement.bind(&"Maximized", start_index)?;
+                (None, next_index)
+            }
         };
 
         statement.bind(

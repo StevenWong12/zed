@@ -671,6 +671,29 @@ impl MacWindow {
                     };
                     native_window.setFrame_display_(frame, YES);
                 }
+                WindowBounds::Centered(size) => {
+                    let display_bounds = screen.visibleFrame();
+                    let origin = display_bounds.origin;
+                    let bounds_size = display_bounds.size;
+
+                    let real_window_half_width: f64 = (size.width.clone() / 2.0).into();
+                    let real_windwo_half_height: f64 = (size.height.clone() / 2.0).into();
+
+                    let origin_x =
+                        origin.x.clone() + bounds_size.width.clone() / 2.0 - real_window_half_width;
+                    let origin_y = origin.y.clone() + bounds_size.height.clone() / 2.0
+                        - real_windwo_half_height;
+
+                    let frame = NSRect::new(
+                        NSPoint::new(origin_x, origin_y),
+                        NSSize {
+                            width: size.width.into(),
+                            height: size.height.into(),
+                        },
+                    );
+
+                    native_window.setFrame_display_(frame, YES);
+                }
             }
 
             window.0.lock().move_traffic_light();
